@@ -97,7 +97,7 @@ Using the copy command the data is loaded into the database table.
    
     \copy books_raw(name,writer,original_language,genre,binding,publication,price,transaction_method,year,read_unread,rating,writer_gender ) FROM 'C:\Users\Dell\Desktop\Projects\Do i read all the books i buy\Books_Management.csv' WITH DELIMITER ',' CSV HEADER;
 
-
+![after copy](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/bd372642-7ddd-41dc-b9e5-78274ea786e3)
 
 
 ## STEP 2 - START NORMALIZING THE DATA
@@ -110,6 +110,10 @@ Using the copy command the data is loaded into the database table.
          
       ALTER TABLE books_raw ADD COLUMN id SERIAL;
       ALTER TABLE books_raw ADD CONSTRAINT books_id PRIMARY KEY (id);
+
+![first db](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/3745e2ad-1d94-460a-976a-0f23ab3f5adc)
+
+![first query](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/64cf71c4-4778-491d-a6ef-8d58dbb9594d)
     
    ### 2.2 Second Normal Form:
    
@@ -174,10 +178,21 @@ Since the rest of the columns are not functionally dependent on book id, we crea
      gender VARCHAR(20) UNIQUE,
      PRIMARY KEY(id)
      );
+
+![leaf table 1](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/bbddad61-2dd0-45f7-a8f5-45edf7faed0e)
+
+![leaf table 2](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/c81b1298-6868-41c1-af5e-6fa37aed0322)
+
+![second db with links](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/aee8db7f-ada8-4878-90e5-2ef40808abd7)
         
   **2.2.b Many-to-Many Relations:**
-    A many-to-many relationship occurs when multiple records in a table are related to multiple records in another table.
-    This can be seen in case of book-writer relationship because a book have many writers, or a writer has many books. So we create a separate writer table. We name it author table.
+  
+A many-to-many relationship occurs when multiple records in a table are related to multiple records in another table.
+This can be seen in case of book-writer relationship because a book have many writers, or a writer has many books. 
+
+![m-t-m](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/bdf833ff-7866-4656-891e-dc42509c9057)
+
+So we create a separate writer table. We name it author table.
    
     CREATE TABLE author(
     id SERIAL,
@@ -192,6 +207,10 @@ Since the rest of the columns are not functionally dependent on book id, we crea
     author_id INTEGER REFERENCES author(id) ON DELETE CASCADE,
     PRIMARY KEY(author_id, book_id)
     );
+
+![leaf table junct](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/028c79dd-6efc-4157-91cb-7ae6b26a94c0)
+
+![junc db](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/536ac6dc-f5bd-40d0-be37-a1f5eb09d49d)
 
   So far, we end up with these tables. They are all in second normal form. All the tables have their own primary keys or a set of primary keys (in case of author-book-junction table) and all the columns in each table are functionally dependent on their respective primary keys.
   
@@ -208,8 +227,16 @@ In our database, we have two such columns. The book_name (A) determines the auth
        gender_id INTEGER REFERENCES gender(id) ON DELETE CASCADE,
        PRIMARY KEY(id)
       );
+![Final Database](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/a8613bce-6202-4558-850a-15e05a9f2f47)
+
 
 ## STEP 3 - PERFORMING QUERIES
+![count of books](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/839b4011-4a8d-493d-81d4-b89222fed6d5)
+
+![female writer](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/a74e6c51-8353-4708-bb73-e914167bb786)
+
+![lafcadio query](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/7197971c-2cca-44b1-a2ce-4bcdae8a6fb2)
+
 
 # References:
 * PostgreSQL For Everybody Specialization
