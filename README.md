@@ -1,8 +1,8 @@
 # Introduction
 
-Spreadsheets are the first go-to tool for all sort of businesses to collect and maintain data. Its easy to just fill in the cells, as long as the quantity of data is either small or medium. As soon as we're dealing with millions or billions data which are created, updated or deleted each day, spreadsheets start to perform less efficiently. In these scenarios, large businesses opt for a database management system, which as its name suggests, manages data in large quantity and in a faster way.  
+Spreadsheets are the first go-to tool for collecting and maintaining data. It's easy to just fill in the cells, as long as the quantity of data is either small or medium. As soon as we're dealing with millions or billions data which are created, updated or deleted each day, spreadsheets start to perform less efficiently. In these scenarios, large businesses opt for a Database Management System (DBMS) (relational or non-relational), which as its name suggests, manages data in large quantity and more efficiently.  
 
-when we're using spreadsheets data is stored in a single space on the computer. As entries into that spreadsheet increases, the chances of data replication also increases. This repetition of data may result in:
+When we're using spreadsheets, data is stored in a single space on the computer. As entries into that spreadsheet increases, the chances of data replication also increases. This repetition of data may result in:
 * Making relations/tables very large.
 * Difficulty maintaining and updating data as it invloves searching many records in a table.
 * Wastage and poor utilization of disk space.
@@ -12,13 +12,13 @@ To handle these problems, we need to get rid of the replicated data and create t
 
 # What is Database Normalization?
 
-According to Wikipedia "Database normalization is the process of structuring a relational database in accordance with a series of normal forms in order to reduce data redundancy and improve data integrity." In short, it is the process of organizing the data in the database. It is used to minimize the redundancy from a relation or set of relations. It is also used to eliminate undesirable characteristics like Insertion, Update, and Deletion Anomalies. Normalization divides the larger table into smaller and links them using relationships.
+According to Wikipedia "Database normalization is the process of structuring a relational database in accordance with a series of normal forms in order to reduce data redundancy and improve data integrity." In short, it is the process of organizing the data in the database. It is used to minimize the redundancy from a relation or set of relations. It is also used to eliminate undesirable characteristics like Insertion, Update, and Deletion Anomalies. Normalization divides the larger table into smaller ones and links them using relationships.
 
 The normal form is used to reduce redundancy from the database table.
 
 ## Why do we need Normalization? 
 
-The main reason for normalizing the relations is removing Insertion, Update, and Deletion Anomalies. Failure to eliminate anomalies leads to data redundancy and can cause data integrity and other problems as the database grows. Normalization consists of a series of guidelines that helps to guide you in creating a good database structure.
+The main reason for normalizing the relations is removing Insertion, Update, and Deletion Anomalies. Failure to eliminate anomalies leads to data redundancy and can cause data integrity and other problems as the database grows. Normalization consists of a series of guidelines that helps to guide us in creating a good database structure.
 
 Data modification anomalies can be categorized into three types:
 
@@ -55,13 +55,14 @@ The goal of this project is to -
     
 # Dataset Used:
 
-For this project I've used a csv file named Books_Management which consists of data on 184 books.
+For this project I've used a csv file named **Books_Management** which consists of data on 184 books.
 
 # Tools used:
 
-For the purpose of this project I've used PostgreSQL SQL Shell to run all the queries. 
+For the purpose of this project I've used **PostgreSQL** and **SQL Shell** to run all the queries. 
 
 # Steps taken:
+
 ## STEP - 1 LOADING THE DATA INTO THE DATABASE
 
   To load the data into the database a table named books_raw is created with all the columns that is in the csv file along with some extra id columns that'll later be used as foreign keys.
@@ -105,7 +106,7 @@ Using the copy command the data is loaded into the database table.
     
   ### 2.1 First Normal Form:
     
-  In the first normal form each field contains a single value. A field may not contain a set of values or a nested record.
+  *In the first normal form each field contains a single value. A field may not contain a set of values or a nested record.*
 
   In order to identify a unique row, a primary key(id) is added into the table.
          
@@ -115,13 +116,15 @@ Using the copy command the data is loaded into the database table.
 ![first db](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/3745e2ad-1d94-460a-976a-0f23ab3f5adc)
 
 ![first query](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/64cf71c4-4778-491d-a6ef-8d58dbb9594d)
+
+This satisfies the first normal form.
     
    ### 2.2 Second Normal Form:
    
 The rules for second normal form are -
 
-* Fulfil the requirements of first normal form.
-* Each non-key attribute must be functionally dependent on the primary key which means each field that is not the primary key is determined by that primary key, so it is specific to that record.
+* *Fulfil the requirements of first normal form.*
+* *Each non-key attribute must be functionally dependent on the primary key which means each field that is not the primary key is determined by that primary key, so it is specific to that record.*
 
 In this step we identify which column is functionally dependent or independent of the primary key i.e., in our case book id, which represents a book.
 
@@ -184,16 +187,17 @@ Since the rest of the columns are not functionally dependent on book id, we crea
 
 ![leaf table 2](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/c81b1298-6868-41c1-af5e-6fa37aed0322)
 
+The database now looks like this with all the tables joined together by the foreign keys.
+
 ![second db with links](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/aee8db7f-ada8-4878-90e5-2ef40808abd7)
         
   **2.2.b Many-to-Many Relations:**
   
-A many-to-many relationship occurs when multiple records in a table are related to multiple records in another table.
-This can be seen in case of book-writer relationship because a book have many writers, or a writer has many books. 
+A many-to-many relationship occurs when multiple records in a table are related to multiple records in another table.This can be seen in case of book-writer relationship because a book have many writers, or a writer has many books. 
 
 ![m-t-m](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/bdf833ff-7866-4656-891e-dc42509c9057)
 
-So we create a separate writer table. We name it author table.
+So, we create a separate writer table. We name it author table.
    
     CREATE TABLE author(
     id SERIAL,
@@ -218,8 +222,8 @@ So we create a separate writer table. We name it author table.
   ### 2.3 Third Normal Form:
   
 The rule for Third Normal Form is:
-* It fulfils the requirements of second normal form.
-* Has no transitive functional dependency which means that every attribute that is not the primary key must depend on the primary key and the primary key only.
+* *It fulfils the requirements of second normal form.*
+* *Has no transitive functional dependency which means that every attribute that is not the primary key must depend on the primary key and the primary key only.*
 
 In our database, we have two such columns. The book_name (A) determines the author (B) column. It further determines the gender (C). So, we need to remove the gender table from book table. We create a different table and join it with the author table with a foreign key, gender_id.
 
@@ -228,17 +232,62 @@ In our database, we have two such columns. The book_name (A) determines the auth
        gender_id INTEGER REFERENCES gender(id) ON DELETE CASCADE,
        PRIMARY KEY(id)
       );
+
+The final database design after attaining the third normal form looks like this-
+
 ![Final Database](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/a8613bce-6202-4558-850a-15e05a9f2f47)
 
 
 ## STEP 3 - PERFORMING QUERIES
+
+The important task for a database management system is to create/read/update/delete data from the database. So to make sure we have created a good database design, we'll perform some queries.
+
+3.1 Inserting new data
+
+    -- first need to enter a new publisher name in publisher table
+     INSERT INTO publisher(publisher_name ) VALUES ('Seven Stories Press');
+
+    -- inserting the new book in the book_title
+     INSERT INTO book_title(name, price,year, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('A Man''s Place',181, 2023, 3, 3, 3, 3, 3, 2);
+
+     -- using subquery to update publisher_id in the book_title
+     UPDATE book_title SET publisher_id = (SELECT id FROM  publisher WHERE publisher_name = 'Seven Stories Press') WHERE name = 'A Man''s Place';
+
+     -- a new author name is added in the author table
+     INSERT INTO author(name,gender_id) VALUES ('Annie Ernaux', 3);
+
+     -- getting the book_id and author_id for inserting into the junction table
+     SELECT id FROM book_title WHERE name = 'A Man''s Place';
+     SELECT id FROM author WHERE name = 'Annie Ernaux';
+
+     -- inserting the values in junction table
+     INSERT INTO author_book_junction(book_id, author_id) VALUES (194,141);
+
+3.2 Reading data
+
 ![count of books](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/839b4011-4a8d-493d-81d4-b89222fed6d5)
 
 ![female writer](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/a74e6c51-8353-4708-bb73-e914167bb786)
 
 ![lafcadio query](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/7197971c-2cca-44b1-a2ce-4bcdae8a6fb2)
 
+3.3 Updating data
 
+    -- updating a column
+       UPDATE book_title SET comment = 'lent it to my friend in 2021, still have not received' WHERE name = 'Pride & Prejudice';
+
+# Conclusion:
+
+1. While creating a database identify which facts need to be stored. Think about what kind of information you want to get from a database system.
+
+2. When storing data in a database don't replicate data, but reference data. Ideally data should be stored in one place in a database (but not always).
+
+3. When grouping facts into tables, consider tables as 'nouns' and columns as 'adjectives'.
+
+4. Use numbers for primary and foreign keys. Its faster for searching/updating/indexing/deleting data.
+
+5. Even though there are 6 major normal forms, achieving third normal form is often enough for a good database design.
+       
 # References:
 * PostgreSQL For Everybody Specialization
 * [Database Normalization Wikipedia](https://en.wikipedia.org/wiki/Database_normalization)
