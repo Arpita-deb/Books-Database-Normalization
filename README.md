@@ -48,9 +48,10 @@ Data modification anomalies can be categorized into three types:
 
 The goal of this project is to -
 
-1. load a csv file into a database table using PostgreSQL.
+1. Load a csv file into a database table using PostgreSQL.
 2. Create a database design for my personal collection of books by normalizing the table upto 3NF (Third Normal Form)
-3. Insert, Update and delete data from the database.
+3. Insert, Update and Delete data from the database.
+4. Create a sql script for the entire database normalization process.
     
 # Dataset Used:
 
