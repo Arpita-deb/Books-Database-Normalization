@@ -1,3 +1,5 @@
+![angelo brewing](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/6e29482e-fa46-4ac1-8636-c236d9eae326)
+
 # Introduction
 
 Spreadsheets are the first go-to tool for collecting and maintaining data. It's easy to just fill in the cells, as long as the quantity of data is either small or medium. As soon as we're dealing with millions or billions data which are created, updated or deleted each day, spreadsheets start to perform less efficiently. In these scenarios, large businesses opt for a Database Management System (DBMS) (relational or non-relational), which as its name suggests, manages data in large quantity and more efficiently.  
