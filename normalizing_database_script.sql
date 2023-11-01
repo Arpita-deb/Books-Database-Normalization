@@ -267,22 +267,26 @@ ORDER BY author_book_junction.book_id
 LIMIT 5;
 
 -- inserting a new entry
+-- first need to enter a new publisher name in publisher table
 INSERT INTO publisher(publisher_name ) VALUES ('Seven Stories Press');
 
 SELECT id FROM  publisher WHERE publisher_name = 'Seven Stories Press';
 
+-- inserting the new book in the book_title
 INSERT INTO book_title(name, price,year, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('A Man''s Place',181, 2023, 3, 3, 3, 3, 3, 2);
 
+-- using subquery to update publisher_id in the book_title
 UPDATE book_title SET publisher_id = (SELECT id FROM  publisher WHERE publisher_name = 'Seven Stories Press') WHERE name = 'A Man''s Place';
 
-
+-- a new author name is added in the author table
 INSERT INTO author(name,gender_id) VALUES ('Annie Ernaux', 3);
 
+-- getting the book_id and author_id for inserting into the junction table
 SELECT id FROM book_title WHERE name = 'A Man''s Place';
 SELECT id FROM author WHERE name = 'Annie Ernaux';
 
+-- inserting the values in junction table
 INSERT INTO author_book_junction(book_id, author_id) VALUES (194,141);
-
 
 
 -- updating a column
