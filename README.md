@@ -1,4 +1,6 @@
-![angelo brewing](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/6e29482e-fa46-4ac1-8636-c236d9eae326)
+# Database Design and Normalization
+
+<img align="center" width=900px height=500px alt="side_sticker" src="https://www.lifewire.com/thmb/kl3swkmAw2qcYBkxsOs9jIKsoFk=/3644x2733/filters:fill(auto,1)/database-157334670-5c29939d46e0fb0001edf766.jpg"/>
 
 # Introduction
 
