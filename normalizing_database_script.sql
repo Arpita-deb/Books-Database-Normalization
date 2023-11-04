@@ -232,7 +232,7 @@ SELECT * FROM author_book_junction LIMIT 5;
 ALTER TABLE book_title DROP COLUMN author_id CASCADE;
 
 
--- some queries
+-- some CRUD queries
 -- showing name and author of the first 5 books
 SELECT book_title.name AS book_name, 
               author.name AS author_name
@@ -266,6 +266,7 @@ WHERE author.gender_id =2
 ORDER BY author_book_junction.book_id
 LIMIT 5;
 
+
 -- inserting a new entry
 -- first need to enter a new publisher name in publisher table
 INSERT INTO publisher(publisher_name ) VALUES ('Seven Stories Press');
@@ -289,7 +290,41 @@ SELECT id FROM author WHERE name = 'Annie Ernaux';
 INSERT INTO author_book_junction(book_id, author_id) VALUES (194,141);
 
 
+
 -- updating a column
 UPDATE book_title SET comment = 'lent it to my friend in 2021, still have not received' WHERE name = 'Pride & Prejudice';
 
 SELECT name, comment FROM book_title WHERE name = 'Pride & Prejudice';
+
+
+-- deleting an entry
+-- I want to delete a book named 'The Alchemist' since i don't have it anymore.
+-- I can delete it from book_title table, but it'll only delete the name of the book, not the author.
+-- I have to delete the author from author table as well.
+
+-- counting the number of books and authors prior to deletion
+SELECT COUNT(*) FROM book_title;
+SELECT COUNT(*) FROM author;
+SELECT COUNT(*) FROM author_book_junction;
+
+-- getting the book_id and author_id from the linking table
+-- this step is optional ( I can either use the name or the id to remove it from the table)
+SELECT book_title.name AS book_name,
+              author_book_junction.book_id AS book_id,
+              author.name AS author_name,
+              author_book_junction.author_id AS author_id
+FROM author_book_junction 
+JOIN book_title ON author_book_junction.book_id= book_title.id 
+JOIN author ON author_book_junction.author_id = author.id
+WHERE book_title.name = 'The Alchemist';
+
+-- deleting entries from parent tables automatically deletes the record from the linking table
+DELETE FROM book_title WHERE  name = 'The Alchemist';
+DELETE FROM author WHERE name = 'Paulo Coelho';
+
+-- since deletion is made in the parent tables, it should reflect on the linking table too
+SELECT COUNT(*) FROM author;
+
+-- It should return 0 rows
+SELECT id FROM book_title WHERE id = 76;
+SELECT id FROM author WHERE id = 91;
