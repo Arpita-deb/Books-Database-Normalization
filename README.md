@@ -61,6 +61,23 @@ The goal of this project is to -
 
 For this project I've used a csv file named **Books_Management** which consists of data on 184 books.
 
+## Schema: 
+
+| Column Name | Column Description |
+| :--- | :--- |
+| Name | Name of the book |
+| Writer | Name of the writer |
+| Original_Language | Language in which the book is originally written |
+| Genre | Genre of the book |
+| Binding | Whether book is Paperback, hardcover or ebook|
+| Publication | Name of the Publication agency |
+| Price | Price of the book in INR(₹) |
+| Transaction_method | Online or Cash or None (if the books are free) |
+| Year | Year of buying |
+| Read/Unread | Yes- If I've read, No- If I've not read; Partially read- If I've started reading but didn't finish |
+| Rating | How I rated the books - Excellent, Moderate, Bad, None(for unread books) |
+| Gender of the writer | Male, Female, No information, Male and Female (for multiple authors) |
+
 # Tools used:
 
 For the purpose of this project I've used **PostgreSQL** and **SQL Shell** to run all the queries. 
@@ -279,6 +296,23 @@ The important task for a database management system is to create/read/update/del
 
     -- updating a column
        UPDATE book_title SET comment = 'lent it to my friend in 2021, still have not received' WHERE name = 'Pride & Prejudice';
+
+3.4 Deleting a data 
+
+I want to delete a book named 'The Alchemist' since i don't have it anymore. I can delete it from book_title table, but it'll only delete the name of the book, not the author. I have to delete the author from author table as well. Deleting entries from parent tables automatically deletes the record from the linking table
+     
+     DELETE FROM book_title WHERE  name = 'The Alchemist';
+     FROM author WHERE name = 'Paulo Coelho';
+
+Since deletion is made in the parent tables, it should reflect on the linking table too
+     
+     SELECT COUNT(*) FROM author_book_junction;
+
+It should return 0 rows
+    
+    SELECT id FROM book_title WHERE id = 76;
+    SELECT id FROM author WHERE id = 91;
+ 
 
 # Conclusion:
 
