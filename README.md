@@ -76,7 +76,7 @@ For this project I've used a csv file named **Books_Management** which consists 
 | Year | Year of buying |
 | Read/Unread | Yes- If I've read, No- If I've not read; Partially read- If I've started reading but didn't finish |
 | Rating | How I rated the books - Excellent, Moderate, Bad, None(for unread books) |
-| Gender of the writer | Male, Female, No information, Male and Female (for multiple authors) |
+| Gender of the writer | Male, Female, Null(if there's no information |
 
 # Tools used:
 
@@ -93,7 +93,7 @@ For the purpose of this project I've used **PostgreSQL** and **SQL Shell** to ru
     CREATE TABLE books_raw(
      name VARCHAR(120) NOT NULL,
      writer VARCHAR(120) NULL, 
-     original_language VARCHAR(50) NULL,
+     original_language VARCHAR(120) NULL,
      genre VARCHAR(50)  NULL,
      binding VARCHAR(50) NULL,
      publication VARCHAR(150) NULL,
