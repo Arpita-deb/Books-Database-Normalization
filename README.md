@@ -210,7 +210,7 @@ Since the rest of the columns are not functionally dependent on book id, we crea
 
 The database now looks like this with all the tables joined together by the foreign keys.
 
-![second db with links](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/aee8db7f-ada8-4878-90e5-2ef40808abd7)
+
         
   **2.2.b Many-to-Many Relations:**
   
@@ -256,8 +256,7 @@ In our database, we have two such columns. The book_name (A) determines the auth
 
 The final database design after attaining the third normal form looks like this-
 
-![Final Database](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/a8613bce-6202-4558-850a-15e05a9f2f47)
-
+![Untitled design](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/734b4ce6-79b9-4ab3-a572-4fe5d1a7c8fe)
 
 ## STEP 3 - PERFORMING QUERIES
 
