@@ -210,7 +210,7 @@ Since the rest of the columns are not functionally dependent on book id, we crea
 
 The database now looks like this with all the tables joined together by the foreign keys.
 
-
+![Screenshot (824)](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/0728c76e-908c-4a4b-a8e6-058881843585)
         
   **2.2.b Many-to-Many Relations:**
   
@@ -264,32 +264,53 @@ The important task for a database management system is to create/read/update/del
 
 3.1 Inserting new data
 
-    -- first need to enter a new publisher name in publisher table
-     INSERT INTO publisher(publisher_name ) VALUES ('Seven Stories Press');
+Inserting data with attributes —
 
-    -- inserting the new book in the book_title
-     INSERT INTO book_title(name, price,year, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('A Man''s Place',181, 2023, 3, 3, 3, 3, 3, 2);
+* Title of the Book — A Man’s Place 
+* Author — Annie Ernaux
+* Gender — Female
+* Publisher — Seven Stories Press
+* Price — 181
+* Year — 2023
+* Transaction method — online
+* Read/unread — yes
+* Genre — Nonfiction
+* Binding — Paperback
+* Original language — French
+* Rating — Excellent.
 
-     -- using subquery to update publisher_id in the book_title
-     UPDATE book_title SET publisher_id = (SELECT id FROM  publisher WHERE publisher_name = 'Seven Stories Press') WHERE name = 'A Man''s Place';
 
-     -- a new author name is added in the author table
-     INSERT INTO author(name,gender_id) VALUES ('Annie Ernaux', 3);
+      -- first need to enter a new publisher name in publisher table
+        INSERT INTO publisher(publisher_name ) VALUES ('Seven Stories Press');
 
-     -- getting the book_id and author_id for inserting into the junction table
-     SELECT id FROM book_title WHERE name = 'A Man''s Place';
-     SELECT id FROM author WHERE name = 'Annie Ernaux';
+      -- inserting the new book in the book_title
+        INSERT INTO book_title(name, price,year, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('A Man''s Place',181, 2023, 3, 3, 3, 3, 3, 2);
 
-     -- inserting the values in junction table
-     INSERT INTO author_book_junction(book_id, author_id) VALUES (194,141);
+      -- using subquery to update publisher_id in the book_title
+        UPDATE book_title SET publisher_id = (SELECT id FROM  publisher WHERE publisher_name = 'Seven Stories Press') WHERE name = 'A Man''s Place';
+
+      -- a new author name is added in the author table
+        INSERT INTO author(name,gender_id) VALUES ('Annie Ernaux', 3);
+
+      -- getting the book_id and author_id for inserting into the junction table
+        SELECT id FROM book_title WHERE name = 'A Man''s Place';
+        SELECT id FROM author WHERE name = 'Annie Ernaux';
+
+      -- inserting the values in junction table
+        INSERT INTO author_book_junction(book_id, author_id) VALUES (194,141);
 
 3.2 Reading data
 
-![count of books](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/839b4011-4a8d-493d-81d4-b89222fed6d5)
+* Number of books for each ratings:
 
-![female writer](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/a74e6c51-8353-4708-bb73-e914167bb786)
+   ![count of books](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/839b4011-4a8d-493d-81d4-b89222fed6d5)
 
-![lafcadio query](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/7197971c-2cca-44b1-a2ce-4bcdae8a6fb2)
+* 10 books written by female authors
+   ![female writer](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/a74e6c51-8353-4708-bb73-e914167bb786)
+
+* List of books by Lafcadio Hearn
+
+   ![lafcadio query](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/7197971c-2cca-44b1-a2ce-4bcdae8a6fb2)
 
 3.3 Updating data
 
