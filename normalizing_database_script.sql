@@ -1,3 +1,4 @@
+-- This SQL script is updated and modified regualrly as new books are added.
 -- run the code in sql shell to run the script
 --\i C:/Users/Dell/Desktop/normalizing_database_script.sql
 
@@ -328,3 +329,55 @@ SELECT COUNT(*) FROM author;
 -- It should return 0 rows
 SELECT id FROM book_title WHERE id = 76;
 SELECT id FROM author WHERE id = 91;
+
+---------------------------------------------------------------------------------------------
+-- New Updates and modifications
+---------------------------------------------------------------------------------------------
+-- commenting on bad books
+SELECT book_title.name, book_title.comment, rating.rating
+FROM book_title JOIN rating ON book_title.rating_id = rating.id 
+WHERE rating.id = 3;
+
+UPDATE book_title SET comment = 'Full of commercial wisdom. Sounds phoney and repetitive.' WHERE name = 'The Monk who sold his Ferrari';
+UPDATE book_title SET comment = 'Overtly Hyped Emily Bronte novel. Too powerful and chaotic.' WHERE name = 'Wuthering Heights';
+UPDATE book_title SET comment = 'Not as good as Homo Sapiens by Y. N. Harari. Too nihilistic view on AI.' WHERE name = 'Homo Deus';
+
+-- number of partially read books
+SELECT COUNT(book_title.name) FROM book_title WHERE read_unread_id = 2;
+
+-- list of partially read books
+SELECT book_title.name, read_unread.read_unread
+FROM book_title JOIN read_unread ON book_title.read_unread_id = read_unread.id 
+WHERE read_unread.id = 2;
+
+-- updating the read_unread id of Kafka on the Shore from partially read to read
+UPDATE book_title SET read_unread_id = 3 WHERE name = 'Kafka on the Shore';
+
+-- number of unread books
+SELECT COUNT(book_title.name) FROM book_title WHERE read_unread_id = 1;
+
+-- list of unread books
+SELECT book_title.name, read_unread.read_unread
+FROM book_title JOIN read_unread ON book_title.read_unread_id = read_unread.id 
+WHERE read_unread.id = 1;
+
+-- updating 'Critique of Pure Reason' from unread to partially read
+UPDATE book_title SET read_unread_id = 2 WHERE name = 'Critique of Pure Reason';
+
+
+-- Commenting on authors with no informations
+SELECT book_title.id, book_title.name, author.name
+FROM author_book_junction
+JOIN book_title ON author_book_junction.book_id = book_title.id
+JOIN author ON author_book_junction.author_id = author.id
+WHERE author.gender_id = 1;
+
+UPDATE book_title SET comment = 'No information on the writer name or gender.' WHERE id IN (52, 53, 103, 104, 139, 175);
+
+
+-- Commenting on free books
+SELECT id, name FROM book_title WHERE transaction_method_id = 2;
+
+UPDATE book_title SET comment = 'It was a present' WHERE id IN (54, 63, 126);
+UPDATE book_title SET comment = 'Self made' WHERE id IN (150, 183,184, 185,186, 187, 188, 189);
+
