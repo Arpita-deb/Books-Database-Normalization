@@ -333,7 +333,7 @@ SELECT id FROM author WHERE id = 91;
 ---------------------------------------------------------------------------------------------
 -- New Updates and modifications
 ---------------------------------------------------------------------------------------------
--- commenting on bad books
+-- commenting on bad books 
 SELECT book_title.name, book_title.comment, rating.rating
 FROM book_title JOIN rating ON book_title.rating_id = rating.id 
 WHERE rating.id = 3;
@@ -381,3 +381,15 @@ SELECT id, name FROM book_title WHERE transaction_method_id = 2;
 UPDATE book_title SET comment = 'It was a present' WHERE id IN (54, 63, 126);
 UPDATE book_title SET comment = 'Self made' WHERE id IN (150, 183,184, 185,186, 187, 188, 189);
 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Adding a new entry- (Seven Pillars of Wisdom, T. E. Lawrence, Penguin, 456, 2023, Online, Partially read, Non-Fiction, Paperback, English, No rating)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO book_title(name, price,year,publisher_id, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('Seven Pillars of Wisdom',456, 2023,53, 3, 2, 3, 3, 3, 2);
+
+--book_id=195
+
+INSERT INTO author(name, gender_id) VALUES ('T. E. Lawrence', 3);
+--author_id = 142
+
+INSERT INTO author_book_junction (book_id, author_id) VALUES (195, 142);
