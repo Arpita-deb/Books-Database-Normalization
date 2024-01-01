@@ -336,13 +336,13 @@ It should return 0 rows
 
 # Conclusion:
 
-1. While creating a database identify which facts need to be stored. Think about what kind of information you want to get from a database system.
+1. While creating a database I identifed which facts need to be stored.
 
-2. When storing data in a database don't replicate data, but reference data. Ideally data should be stored in one place in a database (but not always).
+2. When storing data in a database I didn't replicate data, but referenced data. Ideally data should be stored in one place in a database (but not always).
 
-3. When grouping facts into tables, consider tables as 'nouns' and columns as 'adjectives'.
+3. When grouping facts into tables, I considered tables as 'nouns' and columns as 'adjectives'.
 
-4. Use numbers for primary and foreign keys. Its faster for searching/updating/indexing/deleting data.
+4. Used numbers for primary and foreign keys. Its faster for searching/updating/indexing/deleting data.
 
 5. Even though there are 6 major normal forms, achieving third normal form is often enough for a good database design.
        
