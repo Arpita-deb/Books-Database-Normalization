@@ -383,9 +383,9 @@ UPDATE book_title SET comment = 'Self made' WHERE id IN (150, 183,184, 185,186, 
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
--- Adding a new entry- (Seven Pillars of Wisdom, T. E. Lawrence, Penguin, 456, 2023, Online, Partially read, Non-Fiction, Paperback, English, No rating)
+-- Adding a new entry- (Seven Pillars of Wisdom, T. E. Lawrence, Penguin, 456, 2023, Online, Read, Non-Fiction, Paperback, English, No rating)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO book_title(name, price,year,publisher_id, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('Seven Pillars of Wisdom',456, 2023,53, 3, 2, 3, 3, 3, 2);
+INSERT INTO book_title(name, price,year,publisher_id, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('Seven Pillars of Wisdom',456, 2023,53, 3, 3, 3, 3, 3, 2);
 
 --book_id=195
 
@@ -393,3 +393,11 @@ INSERT INTO author(name, gender_id) VALUES ('T. E. Lawrence', 3);
 --author_id = 142
 
 INSERT INTO author_book_junction (book_id, author_id) VALUES (195, 142);
+
+
+------------------------------------------------------------------------------
+-- Removing some e-books that mistakenly I've deleted from the computer
+------------------------------------------------------------------------------
+DELETE FROM book_title WHERE id IN (1,2,3,4,5,6,7, 165, 166, 167, 168, 169, 170, 174, 190, 191, 193, 175);
+DELETE FROM book_title WHERE id BETWEEN 127 and 156;
+
