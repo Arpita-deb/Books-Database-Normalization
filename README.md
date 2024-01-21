@@ -1,6 +1,6 @@
 # Database Design and Normalization
 
-<img align="center" width=900px height=500px alt="side_sticker" src="https://www.lifewire.com/thmb/kl3swkmAw2qcYBkxsOs9jIKsoFk=/3644x2733/filters:fill(auto,1)/database-157334670-5c29939d46e0fb0001edf766.jpg"/>
+![spreadsheet to database](https://github.com/Arpita-deb/Books-Database-Normalization/assets/139372731/5cc1ce7f-6c4f-4ea4-a9a4-24af84203876)
 
 # Introduction
 
@@ -8,8 +8,8 @@ Spreadsheets are the first go-to tool for collecting and maintaining data. It's 
 
 When we're using spreadsheets, data is stored in a single space on the computer. As entries into that spreadsheet increases, the chances of data replication also increases. This repetition of data may result in:
 * Making relations/tables very large.
-* Difficulty maintaining and updating data as it invloves searching many records in a table.
-* Wastage and poor utilization of disk space.
+* Difficulty maintaining and updating data as it involves searching many records in a table.
+* Poor utilization of disk space.
 * Increased likelihood of errors and inconsistencies.
 
 To handle these problems, we need to get rid of the replicated data and create tables that are smaller, simpler, well - structured and easy to search/update/delete. This is where we need to normalize a database by either creating a new database design (synthesis) or improving an existing database design (decomposition).
@@ -22,7 +22,7 @@ The normal form is used to reduce redundancy from the database table.
 
 ## Why do we need Normalization? 
 
-The main reason for normalizing the relations is removing Insertion, Update, and Deletion Anomalies. Failure to eliminate anomalies leads to data redundancy and can cause data integrity and other problems as the database grows. Normalization consists of a series of guidelines that helps to guide us in creating a good database structure.
+The main reason for normalizing the relations is removing Insertion, Update, and Deletion Anomalies. Failure to eliminate anomalies leads to data redundancy and can cause data integrity and other problems as the database grows. Normalization consists of a series of guidelines that help us to create a good database structure.
 
 Data modification anomalies can be categorized into three types:
 
@@ -30,7 +30,7 @@ Data modification anomalies can be categorized into three types:
 
 * **Deletion Anomaly**: The delete anomaly refers to the situation where the deletion of data results in the unintended loss of some other important data.
 
-* **Updatation Anomaly**: The update anomaly is when an update of a single data value requires multiple rows of data to be updated.
+* **Update Anomaly**: The update anomaly is when an update of a single data value requires multiple rows of data to be updated.
 
 ## Advantages of Normalization:
 
@@ -63,24 +63,27 @@ For this project I've used a csv file named **Books_Management** which consists 
 
 ## Schema: 
 
-| Column Name | Column Description |
-| :--- | :--- |
-| Name | Name of the book |
-| Writer | Name of the writer |
-| Original_Language | Language in which the book is originally written |
-| Genre | Genre of the book |
-| Binding | Whether book is Paperback, hardcover or ebook|
-| Publication | Name of the Publication agency |
-| Price | Price of the book in INR(₹) |
-| Transaction_method | Online or Cash or None (if the books are free) |
-| Year | Year of buying |
-| Read/Unread | Yes- If I've read, No- If I've not read; Partially read- If I've started reading but didn't finish |
-| Rating | How I rated the books - Excellent, Moderate, Bad, None(for unread books) |
-| Gender of the writer | Male, Female, Null(if there's no information |
+| Column Name | Column Description | Data type |
+| :--- | :--- | :--- |
+| Name | Name of the book | chr |
+| Writer | Name of the writer | chr |
+| Original_Language | Language in which the book is originally written | chr |
+| Genre | Genre of the book | chr |
+| Binding | Whether book is Paperback, hardcover or ebook| chr |
+| Publication | Name of the Publication agency | chr |
+| Price | Price of the book in INR(₹) | int |
+| Transaction_method | Online or Cash or None (if the books are free) | chr |
+| Year | Year of buying | int |
+| Read/Unread | Yes- If I've read, No- If I've not read; Partially read- If I've started reading but didn't finish | chr |
+| Rating | How I rated the books - Excellent, Moderate, Bad, None(for unread books) | chr |
+| Gender of the writer | Male, Female, Null(if there's no information | chr |
 
 # Tools used:
 
-For the purpose of this project I've used **PostgreSQL** and **SQL Shell** to run all the queries. 
+For the purpose of this project I've used -
+
+* **PostgreSQL** and **SQL Shell** to create a database design
+* **QuickDbd** to create the Entity-Relationship-Diagrams
 
 # Steps taken:
 
@@ -281,23 +284,36 @@ Inserting data with attributes —
 
 
       -- first need to enter a new publisher name in publisher table
-        INSERT INTO publisher(publisher_name ) VALUES ('Seven Stories Press');
+        INSERT INTO publisher(publisher_name )
+        VALUES ('Seven Stories Press');
 
       -- inserting the new book in the book_title
-        INSERT INTO book_title(name, price,year, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('A Man''s Place',181, 2023, 3, 3, 3, 3, 3, 2);
+        INSERT INTO book_title(name, price,year, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id)
+        VALUES ('A Man''s Place',181, 2023, 3, 3, 3, 3, 3, 2);
 
       -- using subquery to update publisher_id in the book_title
-        UPDATE book_title SET publisher_id = (SELECT id FROM  publisher WHERE publisher_name = 'Seven Stories Press') WHERE name = 'A Man''s Place';
+        UPDATE book_title
+        SET publisher_id = (SELECT id
+                            FROM  publisher
+                            WHERE publisher_name = 'Seven Stories Press')
+        WHERE name = 'A Man''s Place';
 
       -- a new author name is added in the author table
-        INSERT INTO author(name,gender_id) VALUES ('Annie Ernaux', 3);
+        INSERT INTO author(name,gender_id)
+        VALUES ('Annie Ernaux', 3);
 
       -- getting the book_id and author_id for inserting into the junction table
-        SELECT id FROM book_title WHERE name = 'A Man''s Place';
-        SELECT id FROM author WHERE name = 'Annie Ernaux';
+        SELECT id
+        FROM book_title
+        WHERE name = 'A Man''s Place';
+
+        SELECT id
+        FROM author
+        WHERE name = 'Annie Ernaux';
 
       -- inserting the values in junction table
-        INSERT INTO author_book_junction(book_id, author_id) VALUES (194,141);
+        INSERT INTO author_book_junction(book_id, author_id)
+        VALUES (194,141);
 
 3.2 Reading data
 
@@ -315,25 +331,35 @@ Inserting data with attributes —
 3.3 Updating data
 
     -- updating a column
-       UPDATE book_title SET comment = 'lent it to my friend in 2021, still have not received' WHERE name = 'Pride & Prejudice';
+       UPDATE book_title 
+       SET comment = 'lent it to my friend in 2021, still have not received' 
+       WHERE name = 'Pride & Prejudice';
 
 3.4 Deleting a data 
 
 I want to delete a book named 'The Alchemist' since i don't have it anymore. I can delete it from book_title table, but it'll only delete the name of the book, not the author. I have to delete the author from author table as well. Deleting entries from parent tables automatically deletes the record from the linking table
      
-     DELETE FROM book_title WHERE  name = 'The Alchemist';
-     FROM author WHERE name = 'Paulo Coelho';
+     DELETE FROM book_title 
+     WHERE  name = 'The Alchemist';
+     
+     DELETE FROM author 
+     WHERE name = 'Paulo Coelho';
 
 Since deletion is made in the parent tables, it should reflect on the linking table too
      
-     SELECT COUNT(*) FROM author_book_junction;
+     SELECT COUNT(*) 
+     FROM author_book_junction;
 
-It should return 0 rows
+It should return 0 rows.
     
-    SELECT id FROM book_title WHERE id = 76;
-    SELECT id FROM author WHERE id = 91;
+    SELECT id 
+    FROM book_title 
+    WHERE id = 76;
+    
+    SELECT id 
+    FROM author 
+    WHERE id = 91;
  
-
 # Conclusion:
 
 1. While creating a database I identifed which facts need to be stored.
