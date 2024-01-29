@@ -338,8 +338,8 @@ SELECT book_title.name, book_title.comment, rating.rating
 FROM book_title JOIN rating ON book_title.rating_id = rating.id 
 WHERE rating.id = 3;
 
-UPDATE book_title SET comment = 'Full of commercial wisdom. Sounds phoney and repetitive.' WHERE name = 'The Monk who sold his Ferrari';
-UPDATE book_title SET comment = 'Overtly Hyped Emily Bronte novel. Too powerful and chaotic.' WHERE name = 'Wuthering Heights';
+UPDATE book_title SET comment = 'Full of commercial wisdom. Sounds cliched and repetitive.' WHERE name = 'The Monk who sold his Ferrari';
+UPDATE book_title SET comment = 'Overtly Hyped Emily Bronte novel. Full of strong Emotions and chaotic.' WHERE name = 'Wuthering Heights';
 UPDATE book_title SET comment = 'Not as good as Homo Sapiens by Y. N. Harari. Too nihilistic view on AI.' WHERE name = 'Homo Deus';
 
 -- number of partially read books
@@ -366,11 +366,11 @@ UPDATE book_title SET read_unread_id = 2 WHERE name = 'Critique of Pure Reason';
 
 
 -- Commenting on authors with no informations
-SELECT book_title.id, book_title.name, author.name
-FROM author_book_junction
-JOIN book_title ON author_book_junction.book_id = book_title.id
-JOIN author ON author_book_junction.author_id = author.id
-WHERE author.gender_id = 1;
+SELECT b.id, b.name, a.name
+FROM author_book_junction ab
+JOIN book_title b ON ab.book_id = b.id
+JOIN author a ON ab.author_id = a.id
+WHERE a.gender_id = 1;
 
 UPDATE book_title SET comment = 'No information on the writer name or gender.' WHERE id IN (52, 53, 103, 104, 139, 175);
 
@@ -383,7 +383,7 @@ UPDATE book_title SET comment = 'Self made' WHERE id IN (150, 183,184, 185,186, 
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
--- Adding a new entry- (Seven Pillars of Wisdom, T. E. Lawrence, Penguin, 456, 2023, Online, Read, Non-Fiction, Paperback, English, No rating)
+-- Adding a new entry- (Seven Pillars of Wisdom, T. E. Lawrence, Penguin, 456, 2023, Online, Read, Non-Fiction, Paperback, English, Excellent rating)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO book_title(name, price,year,publisher_id, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id) VALUES ('Seven Pillars of Wisdom',456, 2023,53, 3, 3, 3, 3, 3, 2);
 
@@ -401,3 +401,21 @@ INSERT INTO author_book_junction (book_id, author_id) VALUES (195, 142);
 DELETE FROM book_title WHERE id IN (1,2,3,4,5,6,7, 165, 166, 167, 168, 169, 170, 174, 190, 191, 193, 175);
 DELETE FROM book_title WHERE id BETWEEN 127 and 156;
 
+------------------------------------------------------------------------------
+-- Adding a new book 'Letters to Milena' by Franz Kafka
+------------------------------------------------------------------------------
+SELECT id, publisher_name FROM publisher WHERE publisher_name='Vintage Classics';
+-- publisher id = 91
+INSERT INTO book_title(name, price,year,publisher_id, transaction_method_id , read_unread_id ,genre_id ,binding_id,language_id,rating_id)
+  VALUES ('Letters to Milena',393, 2024,91, 3, 2, 3, 3, 4, 1);
+-- book_id = 196
+INSERT INTO author (name,gender_id) VALUES ('Franz Kafka',3); 
+--author_id = 143
+INSERT INTO author_book_junction (book_id, author_id) VALUES (196, 143);
+
+
+SELECT b.name, a.name, b.price, b.year
+FROM author_book_junction ab
+JOIN book_title b ON ab.book_id = b.id
+JOIN author a ON ab.author_id = a.id
+WHERE b.name = 'Letters to Milena';
