@@ -4,15 +4,14 @@
 
 # Introduction
 
-Spreadsheets are the first go-to tool for collecting and maintaining data. It's easy to just fill in the cells, as long as the quantity of data is either small or medium. As soon as we're dealing with millions or billions data which are created, updated or deleted each day, spreadsheets start to perform less efficiently. In these scenarios, large businesses opt for a Database Management System (DBMS) (relational or non-relational), which as its name suggests, manages data in large quantity and more efficiently.  
+It is part of the Data Analysis Project 'Do I read all the books I buy?', where I'll design a database using PostgreSQL to maintain my collection of books digitally. It is done in the Data Cleaning Phase.
 
-When we're using spreadsheets, data is stored in a single space on the computer. As entries into that spreadsheet increases, the chances of data replication also increases. This repetition of data may result in:
-* Making relations/tables very large.
-* Difficulty maintaining and updating data as it involves searching many records in a table.
-* Poor utilization of disk space.
-* Increased likelihood of errors and inconsistencies.
+The goal of this project is to -
 
-To handle these problems, we need to get rid of the replicated data and create tables that are smaller, simpler, well - structured and easy to search/update/delete. This is where we need to normalize a database by either creating a new database design (synthesis) or improving an existing database design (decomposition).
+1. Load a csv file into a database table using PostgreSQL.
+2. Create a database design for my personal collection of books by normalizing the table upto 3NF (Third Normal Form)
+3. Insert, Update and Delete data from the database.
+4. Create a sql script for the entire database normalization process.
 
 # What is Database Normalization?
 
@@ -32,31 +31,6 @@ Data modification anomalies can be categorized into three types:
 
 * **Update Anomaly**: The update anomaly is when an update of a single data value requires multiple rows of data to be updated.
 
-## Advantages of Normalization:
-
-* Reduced redundancy, which means less data duplication and more efficient storage usage.
-* Increased integrity and consistency, which means the data is always accurate and unambiguous.
-* Improved query performance and organization, which means the data is easier to find and use.
-* Increased security and connection, which means the data is protected and can be linked to other systems.
-* Cost reduction, which means less storage and maintenance expenses.
-
-## Disadvantages of Normalization:
-
-* Multiple leaf tables that needs to be linked together with sophisticated JOINs which results in slower read times.
-* As number of tables increases maintenance level also increases.
-* The performance degrades when normalizing the relations to higher normal forms, i.e., 4NF, 5NF.
-* It is very time-consuming and difficult to normalize relations of a higher degree.
-* Careless decomposition may lead to a bad database design, leading to serious problems.
-
-# Overview of the Project:
-
-The goal of this project is to -
-
-1. Load a csv file into a database table using PostgreSQL.
-2. Create a database design for my personal collection of books by normalizing the table upto 3NF (Third Normal Form)
-3. Insert, Update and Delete data from the database.
-4. Create a sql script for the entire database normalization process.
-    
 # Dataset Used:
 
 For this project I've used a csv file named **Books_Management** which consists of data on 184 books.
@@ -373,6 +347,13 @@ It should return 0 rows.
 5. Even though there are 6 major normal forms, achieving third normal form is often enough for a good database design.
        
 # References:
+
 * PostgreSQL For Everybody Specialization
 * [Database Normalization Wikipedia](https://en.wikipedia.org/wiki/Database_normalization)
 * [Database Normalization](https://www.databasestar.com/database-normalization/)
+
+# Appendix:
+
+* [Do I read all the books I buy? - An analysis of my collection of books](https://github.com/Arpita-deb/Do_I_read_all_the_books_I_buy.git) 
+* [From Spreadsheets to Database - A Comprehensive study of Database Normalization](https://medium.com/@arpita_deb/from-spreadsheets-to-database-c2e8dbeb6a76)
+
