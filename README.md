@@ -354,6 +354,5 @@ It should return 0 rows.
 
 # Appendix:
 
-* [Do I read all the books I buy? - An analysis of my collection of books](https://github.com/Arpita-deb/Do_I_read_all_the_books_I_buy.git) 
-* [From Spreadsheets to Database - A Comprehensive study of Database Normalization](https://medium.com/@arpita_deb/from-spreadsheets-to-database-c2e8dbeb6a76)
+* [From Spreadsheets to Database - Creating A Normalized (and Denormalized) Database](https://medium.com/@arpita_deb/from-spreadsheets-to-database-c2e8dbeb6a76)
 
