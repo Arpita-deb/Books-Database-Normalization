@@ -354,7 +354,7 @@ It should return 0 rows.
 
 # Appendix:
 
-* [From Spreadsheets to Database - Creating A Normalized (and Denormalized) Database](https://medium.com/@arpita_deb/from-spreadsheets-to-database-c2e8dbeb6a76)
+* A detailed Article about the Normalization and Denormalization process: [From Spreadsheets to Database - Creating A Normalized (and Denormalized) Database](https://medium.com/@arpita_deb/from-spreadsheets-to-database-c2e8dbeb6a76)
 
 # License:
 
