@@ -6,12 +6,15 @@
 
 It is part of the Data Analysis Project 'Do I read all the books I buy?', where I'll design a database using PostgreSQL to maintain my collection of books digitally. It is done in the Data Cleaning Phase.
 
-The goal of this project is to -
+# Purpose of the database:
 
-1. Load a csv file into a database table using PostgreSQL.
-2. Create a database design for my personal collection of books by normalizing the table upto 3NF (Third Normal Form)
-3. Insert, Update and Delete data from the database.
-4. Create a sql script for the entire database normalization process.
+The database is built to organize and manage a personal collection of books. It helps in tracking book details such as title, price, publication year, genre, author(s), language, and ratings. It also supports actions like marking books as read/unread, recording transaction methods (e.g., purchased, borrowed), and storing other key metadata about each book.
+
+# Objectives:
+
+1. Design a database schema and implement it in PostgreSQL database system.
+2. Follow the best practices to normalize the tables to reduce data redundancy and increase efficiency.
+3. Perform CRUD Operations to add, update or delete data from the database.
 
 # What is Database Normalization?
 
@@ -334,18 +337,45 @@ It should return 0 rows.
     FROM author 
     WHERE id = 91;
  
-# Conclusion:
+# Summary:
 
-1. While creating a database I identifed which facts need to be stored.
+Here's a quick summary of the tables I've created to manage different aspects of my collection of books:
 
-2. When storing data in a database I didn't replicate data, but referenced data. Ideally data should be stored in one place in a database (but not always).
+**1. Book Titles (book_title):**
 
-3. When grouping facts into tables, I considered tables as 'nouns' and columns as 'adjectives'.
+This table serves as the central hub of the database, containing essential details about each book, such as its name, price, publication year, and timestamp for when it was added or updated. It connects to other tables through foreign keys, linking the book to its genre, language, transaction method, publisher, read/unread status, and rating.
 
-4. Used numbers for primary and foreign keys. Its faster for searching/updating/indexing/deleting data.
+**2. Author-Book Relationship (author-book-junction):**
 
-5. Even though there are 6 major normal forms, achieving third normal form is often enough for a good database design.
-       
+Since a book may have multiple authors, this junction table establishes a many-to-many relationship between authors and books. It links the book_title and author tables.
+
+**3. Authors (author):**
+
+This table contains details about authors, including their name and gender, and is linked to the gender table to maintain information on gender identity.
+
+**4. Genre, Language, Rating, and Publisher Tables:**
+
+Each of these tables holds specific attributes about a book:
+
+  * genre: Lists different genres like fiction, non-fiction, etc.
+  * language: Stores the language of the book.
+  * rating: Captures the rating assigned to each book (e.g., out of 5 or 10).
+  * publisher: Stores publisher information, including the name.
+
+**5. Read/Unread Status (read_unread):**
+
+This table allows tracking whether a book has been read or is yet to be read, helping organize the reading progress.
+
+**6. Transaction Method (transaction_method):**
+
+This table logs how the book was obtained—whether it was purchased, borrowed, or received as a gift.
+
+**7. Binding Type (binding_type):**
+
+It captures the physical binding of the book (e.g., hardcover, paperback, etc.).
+
+The database effectively organizes and tracks books in a digital collection by normalizing various related attributes (e.g., genre, language, rating). It offers a structured way to manage large collections, ensuring easy retrieval of information, detailed data analysis, and better management of books through read/unread status, transaction history, and ratings. By maintaining relationships between authors, genres, publishers, and languages, the database supports flexibility and scalability, allowing future additions or updates without redundancy or data loss.
+
 # References:
 
 * PostgreSQL For Everybody Specialization
